@@ -16,7 +16,7 @@ python app.py
 python scraper.py <newspapers_name> <article_number>
 ```
 
--   Then you need to run extract.py to extract the data from the scraped articles. You can specify the minimum character word count for each paragraph of the articles you want to extract, as well as a list of newspaper names from which you want to extract paragraphs, separated by spaces:
+-   Then you need to run extract.py to extract the data from the scraped articles. You can specify the minimum character and word count for each paragraph of the articles you want to extract, as well as a list of newspaper names from which you want to extract paragraphs, separated by spaces:
 
 ```bash
 python extract.py <min_character_count> <min_word_count> <list_of_newspaper_names_separated_by_blank_spaces>
