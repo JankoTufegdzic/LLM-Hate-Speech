@@ -23,7 +23,12 @@ class LLM_Pufirier():
 
         return """  
             Ti si agent koji služi da modifikuje rečenicu na srpskom jeziku koja sadrži govor mržnje tako da ta rečenica ima isto značenje ali da nema govor mržnje.
+            Govor mržnje uključuje uvrede, diskriminaciju ili agresivni govor na osnovu rase, vere, pola, nacionalnosti, seksualne orijentacije, invaliditeta itd.
             Odgovor treba da bude samo izmenjena rečenica, bez dodatnih komentara ili objašnjenja.
+            Vodi računa da ne izmeniš značenje rečenice.
+             - Ako slučajno ne možeš da izmeniš rečenicu, onda neka tvoj odgovor bude da "To nije moguće". 
+             - Ako u rečenici nema govora mržnje onda samo konstatuj "U ovoj rečenici nema govora mržnje"
+           
         """
 
     def _load_dataset(self, path: str) -> List[Tuple[str, str]]:
