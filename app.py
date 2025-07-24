@@ -6,6 +6,9 @@ from llm.llm_purifier import LLM_Pufirier
 
 app = Flask(__name__)
 
+llm_purifier = LLM_Pufirier(model_name="mistral")
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -13,9 +16,13 @@ def index():
 @app.route('/change', methods=['GET', 'POST'])
 def change():
     input_text = ''
+    output_text = ''
     if request.method == 'POST':
         input_text = request.form.get('user_input', '')
-    return render_template('change.html', input_text=input_text)
+
+        output_text = llm_purifier.purify(input_text)
+
+    return render_template('change.html', input_text=input_text, output_text=output_text)
 
 @app.route('/highlight', methods=['GET', 'POST'])
 def highlight():
@@ -39,8 +46,7 @@ def highlight():
     return render_template('highlight.html', highlighted_text=highlighted_text, url=url)
 
 if __name__ == '__main__':
-    llm_purifier = LLM_Pufirier(model_name="mistral")
 
     print(llm_purifier.purify("Ti si ruzan covek!"))
 
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
