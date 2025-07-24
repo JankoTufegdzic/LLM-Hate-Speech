@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 import requests
 from bs4 import BeautifulSoup
 
+from llm.llm_purifier import LLM_Pufirier
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -37,4 +39,8 @@ def highlight():
     return render_template('highlight.html', highlighted_text=highlighted_text, url=url)
 
 if __name__ == '__main__':
+    llm_purifier = LLM_Pufirier(model_name="mistral")
+
+    print(llm_purifier.purify("Ti si ruzan covek!"))
+
     app.run(debug=True)
