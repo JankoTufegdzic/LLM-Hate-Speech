@@ -20,7 +20,8 @@ def change():
     if request.method == 'POST':
         input_text = request.form.get('user_input', '')
 
-        output_text = llm_purifier.purify(input_text)
+        output_text, similarity = llm_purifier.purify(input_text)
+        output_text = f"[{similarity:.2f}] " + output_text
 
     return render_template('change.html', input_text=input_text, output_text=output_text)
 
@@ -46,7 +47,4 @@ def highlight():
     return render_template('highlight.html', highlighted_text=highlighted_text, url=url)
 
 if __name__ == '__main__':
-
-    print(llm_purifier.purify("Ti si ruzan covek!"))
-
     app.run(host="0.0.0.0", port=5000, debug=True)
