@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from typing import List, Tuple
 
 
-class LLM_Detector(ABC):
+class LLM_Pufirier():
     def __init__(self, model_name: str, dataset_path: str = None, few_shot_examples: int = 3):
         self.model_name = model_name
         self.conversation_history = []
