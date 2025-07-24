@@ -22,7 +22,8 @@ class LLM_Pufirier():
         # Base prompt
 
         return """  
-            Ti si agent koji služi da modifikuje rečenicu koja sadrži govor mržnje tako da ta rečenica ima isto značenje ali da nema govor mržnje.
+            Ti si agent koji služi da modifikuje rečenicu na srpskom jeziku koja sadrži govor mržnje tako da ta rečenica ima isto značenje ali da nema govor mržnje.
+            Odgovor treba da bude samo izmenjena rečenica, bez dodatnih komentara ili objašnjenja.
         """
 
     def _load_dataset(self, path: str) -> List[Tuple[str, str]]:
