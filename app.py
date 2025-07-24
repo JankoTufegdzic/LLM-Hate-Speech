@@ -6,7 +6,7 @@ from llm.llm_purifier import LLM_Pufirier
 
 app = Flask(__name__)
 
-llm_purifier = LLM_Pufirier(model_name="mistral")
+llm_purifier = LLM_Pufirier(model_name="llama3")
 
 
 @app.route('/')
@@ -68,5 +68,5 @@ if __name__ == '__main__':
 
         # Convert to DataFrame at the end
     dataset = pd.DataFrame(data)
-    dataset.to_excel("result_mistral.xlsx",index=False)
+    dataset.to_excel(f"result_{llm_purifier.model_name}.xlsx",index=False)
     #app.run(host="0.0.0.0", port=5000, debug=True)
