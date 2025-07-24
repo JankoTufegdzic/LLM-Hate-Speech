@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import requests
 from bs4 import BeautifulSoup
-
+import pandas as pd
 from llm.llm_purifier import LLM_Pufirier
 
 app = Flask(__name__)
@@ -20,8 +20,11 @@ def change():
     if request.method == 'POST':
         input_text = request.form.get('user_input', '')
 
-        output_text, similarity = llm_purifier.purify(input_text)
-        output_text = f"[{similarity:.2f}] " + output_text
+        output_text, similarity, neutral_statement = llm_purifier.purify(input_text)
+        if neutral_statement:
+            output_text = "[Neutralna poruka] " + output_text
+        else:
+            output_text = f"[{similarity:.2f}] " + output_text
 
     return render_template('change.html', input_text=input_text, output_text=output_text)
 
@@ -47,4 +50,23 @@ def highlight():
     return render_template('highlight.html', highlighted_text=highlighted_text, url=url)
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    data = []  # Use a regular list for appending
+
+    with open("dataset/hate_speech_cleaned.txt") as f:
+        lines = f.readlines()
+        for line in lines:
+            if len(line.strip()) == 0:  # Better empty line check
+                continue
+            changed, similarity, isNeutral = llm_purifier.purify(line)
+            
+            data.append({
+                "Original": line,
+                "Changed": changed,
+                "IsNeutral": isNeutral,
+                "Cosine Similarity": similarity
+            })
+
+        # Convert to DataFrame at the end
+    dataset = pd.DataFrame(data)
+    dataset.to_excel("result_mistral.xlsx",index=False)
+    #app.run(host="0.0.0.0", port=5000, debug=True)
