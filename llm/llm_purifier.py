@@ -19,19 +19,16 @@ class LLM_Detector(ABC):
         self._add_to_history("system", self.system_prompt)
 
     def _build_base_prompt(self) -> str:
-        return """You are an ASL gloss generator for airport announcements. Follow STRICTLY:
-1. Output ONLY the gloss text exactly as shown in examples
-2. Maintain the SHORTENED grammar style from samples
-3. Use LOWERCASE except for [Number]/[Location]/[DateTime]/[Person]
-4. Number of specific tokens [Number]/[Location]/[DateTime]/[Person] should be the same as in the input
-5. Keep the SPECIFIC phrase patterns from examples
-6. NEVER add explanations or punctuation
+        # Base prompt
 
-Example transformations:"""
+        return """  
+            Ti si agent koji služi da modifikuje rečenicu koja sadrži govor mržnje tako da ta rečenica ima isto značenje ali da nema govor mržnje.
+        """
 
     def _load_dataset(self, path: str) -> List[Tuple[str, str]]:
-        data = pd.read_csv(path)
-        return list(zip(data['text'], data['gloss']))
+        return None
+        # data = pd.read_csv(path)
+        # return list(zip(data['text'], data['gloss']))
 
     def _get_few_shot_examples(self, n: int) -> str:
         if not self.dataset or len(self.dataset) < n:
@@ -44,8 +41,10 @@ Example transformations:"""
     def _add_to_history(self, role: str, content: str):
         self.conversation_history.append({"role": role, "content": content})
 
-    def translate(self, english_text: str) -> str:
-        self._add_to_history("user", f"Translate to ASL gloss: {english_text}")
+    def purify(self, hate_speech_text: str) -> str:
+
+        # Agent prompt
+        self._add_to_history("user", f"Modifikuj ovu rečenicu: {hate_speech_text}")
         
         response = requests.post(
             "http://localhost:11434/api/chat",
