@@ -6,7 +6,7 @@ from llm.llm_purifier import LLM_Pufirier
 
 app = Flask(__name__)
 
-llm_purifier = LLM_Pufirier(model_name="llama3")
+llm_purifier = LLM_Pufirier(model_name="qwen3")
 
 
 @app.route('/')

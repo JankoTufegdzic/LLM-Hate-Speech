@@ -1,4 +1,5 @@
 import os
+import re
 import requests
 import pandas as pd
 import torch
@@ -71,9 +72,11 @@ class LLM_Pufirier():
         cleaned_content = content.replace("Izlaz: ", "")
 
         if "Neutralna poruka." in cleaned_content:
+            cleaned_content= re.sub(r"<think>.*?</think>", "", cleaned_content, flags=re.DOTALL)
             cleaned_content = cleaned_content.replace("Neutralna poruka.", "")
             return cleaned_content, 0.0, True
         else:
+            cleaned_content= re.sub(r"<think>.*?</think>", "", cleaned_content, flags=re.DOTALL)
             cleaned_content = cleaned_content.replace("Preformulisana.", "")
             cosine_sim = self._compute_cosine_similarity(cleaned_content, hate_speech_text)
             return cleaned_content, cosine_sim, False

@@ -68,9 +68,62 @@ Izlaz: „Neutralna poruka. Nije ispravno donositi sud o ljudima na osnovu njiho
 """
 
 QWEN3_PROMPT="""
+Tvoj zadatak je da analiziraš jednu rečenicu i ispraviš je tako da ukloniš govor mržnje, uvrede, predrasude ili diskriminatorni sadržaj, ali da zadržiš osnovnu poruku ako je moguće.
+Vrati samo jedan red:
+Ako si ispravio rečenicu, započni sa „Preformulisana.“
+Ako si zamenio rečenicu neutralnom porukom, započni sa „Neutralna poruka.“
+Ne objašnjavaj, ne dodaj razloge, vrati samo rezultat.
+
+Primeri:
+Ulaz: „Ti cigani stalno kradu.“
+Izlaz: Neutralna poruka. Neprihvatljivo je da generalizujemo čitav narod zbog postupaka pojedinaca.
+
+Ulaz: „Mrzim gejeve, to nije prirodno.“
+Izlaz: Preformulisana. Smatram da su različiti načini života legitimni i važno je poštovati tuđe izbore.
+
+Ulaz: „Žene nisu za programiranje.“
+Izlaz: Preformulisana. Verujem da sposobnosti u programiranju ne zavise od pola.
+
+Ulaz: „Svi Albanci su opasni.“
+Izlaz: Neutralna poruka. Nije ispravno donositi sud o ljudima na osnovu njihove nacionalnosti.
+
 """
 
 PHI3_PROMPT="""
+Tvoj zadatak je da analiziraš unetu rečenicu i ispraviš je tako da ukloniš svaki govor mržnje, uvrede, predrasude ili diskriminatorni sadržaj, ali da zadržiš osnovnu poruku ako je moguće. Rečenica treba da ostane informativna, ali da bude kulturna, neutralna i nepristrasna.
+
+Govor mržnje uključuje:
+
+vređanje ili omalovažavanje ljudi na osnovu rase, vere, nacionalnosti, pola, seksualne orijentacije, invaliditeta ili društvenog statusa
+
+stereotipe, generalizacije i pozive na nasilje
+
+Uputstvo:
+
+Ako je moguće, preformuliši rečenicu i zadrži njenu osnovnu poruku bez uvredljivog sadržaja
+
+Ako rečenica nema korisnu informaciju i sadrži samo govor mržnje, zameni je neutralnom porukom
+
+Na početak odgovora uvek dodaj:
+
+„Preformulisana.“ ako si izmenio rečenicu i zadržao smisao
+
+„Neutralna poruka.“ ako si je zamenio neutralnom izjavom
+
+Primeri:
+
+Ulaz: „Ti cigani stalno kradu.“
+Izlaz: Neutralna poruka. Neprihvatljivo je da generalizujemo čitav narod zbog postupaka pojedinaca.
+
+Ulaz: „Mrzim gejeve, to nije prirodno.“
+Izlaz: Preformulisana. Smatram da su različiti načini života legitimni i važno je poštovati tuđe izbore.
+
+Ulaz: „Žene nisu za programiranje.“
+Izlaz: Preformulisana. Verujem da sposobnosti u programiranju ne zavise od pola.
+
+Ulaz: „Svi Albanci su opasni.“
+Izlaz: Neutralna poruka. Nije ispravno donositi sud o ljudima na osnovu njihove nacionalnosti.
+
 """
 
 prompt_map={"mistral":MISTRAL_PROMPT, "llama3": LLAMA3_PROMPT, "qwen3": QWEN3_PROMPT,"phi3":PHI3_PROMPT}
