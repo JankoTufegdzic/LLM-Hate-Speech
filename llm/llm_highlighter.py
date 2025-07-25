@@ -1,5 +1,6 @@
 from typing import List, Tuple
 import requests
+import re
 from .helper import highlight_prompt_map
 
 class LLM_Highlighter():
@@ -56,7 +57,9 @@ class LLM_Highlighter():
         content = result.get("message", {}).get("content", "").strip()
         self._add_to_history("assistant", content)
 
-        cleaned_content=content.replace("Izlaz:","")
+        cleaned_content= re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL)
+        cleaned_content=cleaned_content.replace("Izlaz:","")
         cleaned_content=cleaned_content.replace("Ulaz:","")
+        cleaned_content=cleaned_content.strip()
 
         return cleaned_content

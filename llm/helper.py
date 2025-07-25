@@ -157,4 +157,94 @@ Izlaz: <mark>Svi Albanci su opasni</mark>.
 
 """
 
-highlight_prompt_map={"mistral":MISTRAL_HIGHLIGHT_PROMPT}
+LLAMA3_HIGHLIGHT_PROMPT="""
+Zadatak: Obeležavanje govora mržnje u tekstu.
+
+U tekstu koji sledi posle reči "Ulaz:", pronađi sve delove koji predstavljaju govor mržnje — to su uvrede, stereotipi, diskriminatorne ili nasilne izjave na osnovu rase, vere, nacionalnosti, pola, seksualne orijentacije, invaliditeta ili društvenog statusa.
+
+Ako tekst NE sadrži govor mržnje, moraš da vratiš TAČNO onaj tekst koji je bio nakon reči "Ulaz:", bez ikakvih dodataka.
+
+Zadatak:
+Označi sve uvredljive ili diskriminatorne delove tako što ćeš ih staviti između <mark> i </mark>.
+Ne menjaj ostatak teksta.
+Ne dodaj nikakvo objašnjenje.
+Vrati samo rezultat.
+
+Primeri:
+
+Ulaz: Ti cigani stalno kradu.
+Izlaz: Ti <mark>cigani stalno kradu</mark>.
+
+Ulaz: Mrzim gejeve, to nije prirodno.
+Izlaz: <mark>Mrzim gejeve, to nije prirodno</mark>.
+
+Ulaz: Žene su previše emotivne da bi bile lideri.
+Izlaz: <mark>Žene su previše emotivne da bi bile lideri</mark>.
+
+Ulaz: On je retardiran, ne zna ništa.
+Izlaz: On je <mark>retardiran</mark>, ne zna ništa.
+
+Ulaz: Svi Albanci su opasni.
+Izlaz: <mark>Svi Albanci su opasni</mark>.
+
+"""
+QWEN3_HIGHLIGHT_PROMPT="""
+Analiziraj tekst koji dolazi posle reči "Ulaz:" i označi sve delove koji sadrže govor mržnje — uvrede, stereotipe, diskriminaciju ili nasilne tvrdnje na osnovu rase, vere, nacionalnosti, pola, seksualne orijentacije, invaliditeta ili društvenog statusa.
+
+Ako u tekstu nema govora mržnje, moraš tačno da vratiš neizmenjeni tekst koji je usledio posle "Ulaz:".
+
+Zadatak:
+- Samo delove govora mržnje obeleži tagovima <mark> i </mark>
+- Ostatak teksta ne smeš da menjaš
+- Ne dodaj nikakve komentare, objašnjenja ni napomene
+- Vrati samo označen tekst
+
+Primeri:
+
+Ulaz: Ti cigani stalno kradu.
+Izlaz: Ti <mark>cigani stalno kradu</mark>.
+
+Ulaz: Mrzim gejeve, to nije prirodno.
+Izlaz: <mark>Mrzim gejeve, to nije prirodno</mark>.
+
+Ulaz: Žene su previše emotivne da bi bile lideri.
+Izlaz: <mark>Žene su previše emotivne da bi bile lideri</mark>.
+
+Ulaz: On je retardiran, ne zna ništa.
+Izlaz: On je <mark>retardiran</mark>, ne zna ništa.
+
+Ulaz: Svi Albanci su opasni.
+Izlaz: <mark>Svi Albanci su opasni</mark>.
+
+"""
+PHI3_HIGHLIGHT_PROMPT="""
+U tekstu koji dolazi nakon reči "Ulaz:", pronađi sve izraze koji sadrže govor mržnje — to uključuje uvrede, stereotipe, diskriminatorne ili nasilne izjave na osnovu rase, vere, nacionalnosti, pola, seksualne orijentacije, invaliditeta ili društvenog statusa.
+
+Ako tekst ne sadrži govor mržnje, MORAŠ da vratiš taj tekst bez ikakvih promena.
+
+Zadatak:
+- Obeleži samo govor mržnje između tagova <mark> i </mark>
+- Ne menjaj ostatak teksta
+- Ne dodaj objašnjenja, uvode ni napomene
+- Vrati samo označeni tekst
+
+Primeri:
+
+Ulaz: Ti cigani stalno kradu.
+Izlaz: Ti <mark>cigani stalno kradu</mark>.
+
+Ulaz: Mrzim gejeve, to nije prirodno.
+Izlaz: <mark>Mrzim gejeve, to nije prirodno</mark>.
+
+Ulaz: Žene su previše emotivne da bi bile lideri.
+Izlaz: <mark>Žene su previše emotivne da bi bile lideri</mark>.
+
+Ulaz: On je retardiran, ne zna ništa.
+Izlaz: On je <mark>retardiran</mark>, ne zna ništa.
+
+Ulaz: Svi Albanci su opasni.
+Izlaz: <mark>Svi Albanci su opasni</mark>.
+
+"""
+
+highlight_prompt_map={"mistral":MISTRAL_HIGHLIGHT_PROMPT,"llama3":LLAMA3_HIGHLIGHT_PROMPT,"qwen3":QWEN3_HIGHLIGHT_PROMPT,"phi3":PHI3_HIGHLIGHT_PROMPT}

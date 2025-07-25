@@ -7,7 +7,7 @@ from llm.llm_highlighter import LLM_Highlighter
 
 app = Flask(__name__)
 
-model_name="mistral"
+model_name="qwen3"
 llm_purifier = LLM_Pufirier(model_name=model_name)
 llm_highlighter=LLM_Highlighter(model_name=model_name)
 
@@ -38,7 +38,7 @@ def highlight():
     if request.method == 'POST':
         url = request.form.get('url_input', '')
         try:
-            # TODO: Add better parser
+            # TODO: Add scraper
             response = requests.get(url)
             soup = BeautifulSoup(response.text, 'html.parser')
             text = soup.get_text(separator=' ', strip=True)
@@ -71,6 +71,6 @@ if __name__ == '__main__':
     #     # Convert to DataFrame at the end
     # dataset = pd.DataFrame(data)
     # dataset.to_excel(f"result_{llm_purifier.model_name}.xlsx",index=False)
-   
-
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    print(llm_highlighter.highlight("Ja živim u Turskoj. Svi turci su mnogo ružni. Ali su dobar narod."))
+    
+    # app.run(host="0.0.0.0", port=5000, debug=True)
