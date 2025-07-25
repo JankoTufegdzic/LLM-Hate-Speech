@@ -41,7 +41,7 @@ def highlight():
             # TODO: Add better parser
             response = requests.get(url)
             soup = BeautifulSoup(response.text, 'html.parser')
-            text = soup.get_text(separator='.!?', strip=True)
+            text = soup.get_text(separator=' ', strip=True)
             words = text.split()
             
             highlighted_text=llm_highlighter.highlight(words)
