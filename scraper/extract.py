@@ -1,6 +1,6 @@
 import os
 import sys
-from utils import save_content_to_file
+from scraper.utils import save_content_to_file
 
 allowed = ["informer", "telegraf", "kurir", "alo", "danas"]
 

@@ -1,4 +1,4 @@
-from utils import save_content_to_file
+from scraper.utils import save_content_to_file
 from bs4 import BeautifulSoup
 import requests
 import os

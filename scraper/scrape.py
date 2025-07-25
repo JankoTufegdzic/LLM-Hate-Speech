@@ -1,11 +1,11 @@
 import sys
-from informer import extract_informer, extract_content_from_single_article_informer
-from telegraf import extract_telegraf, extract_content_from_single_article_telegraf
-from kurir import extract_kurir, extract_content_from_single_article_kurir
-from danas import extract_danas, extract_content_from_single_article_danas
-from alo import extract_alo, extract_content_from_single_article_alo
-from general_scraper import extract_text_from_single_page
-from utils import save_content_to_file
+from scraper.informer import extract_informer, extract_content_from_single_article_informer
+from scraper.telegraf import extract_telegraf, extract_content_from_single_article_telegraf
+from scraper.kurir import extract_kurir, extract_content_from_single_article_kurir
+from scraper.danas import extract_danas, extract_content_from_single_article_danas
+from scraper.alo import extract_alo, extract_content_from_single_article_alo
+from scraper.general_scraper import extract_text_from_single_page
+from scraper.utils import save_content_to_file
 
 
 def perform_scrape(website_url):
