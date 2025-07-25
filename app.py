@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from llm.llm_purifier import LLM_Pufirier
 from llm.llm_highlighter import LLM_Highlighter
+from scraper.scrape import perform_scrape
+from scraper.extract import filter_general_text
 
 app = Flask(__name__)
 
@@ -38,11 +40,12 @@ def highlight():
     if request.method == 'POST':
         url = request.form.get('url_input', '')
         try:
-            # TODO: Add scraper
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            text = soup.get_text(separator=' ', strip=True)
-            words = text.split()
+            # Minimal character and word count for each extracted paragraph (lenient filter).
+            min_char_count = 20
+            min_word_count = 5
+            perform_scrape(url)
+            text_list = filter_general_text(min_char_count, min_word_count)
+            words = " ".join(text_list)
             
             highlighted_text=llm_highlighter.highlight(words)
             print(highlighted_text)

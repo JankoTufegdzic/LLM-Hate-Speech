@@ -1,12 +1,21 @@
 Steps for extracting content:
-1) Run the scrape.py script to scrape websites and extract content.
-   Usage: python scrape.py <newspaper_name> <article_count>.
-   Newspaper name is required and can be one of the following: informer, telegraf, kurir, danas, alo, all.
-   If 'all' is selected, all newspaper sources will be used for the extraction.
-   Article count (to extract per newspaper) is optional, and defaults to 10.
-2) Run the extract.py script to filter and merge the extracted content.
-   Usage: python extract.py <min_character_count> <min_word_count> <list_of_newspaper_names_separated_by_blank_spaces>.
-   Minimum character and word count can be left 0, which defaults them to 20 and 5, respectively.
-   Newspaper name is required and can be one of the following: informer, telegraf, kurir, danas, alo, or can be left blank.
-   If no newspapers are provided, the extraction is performed for all newspapers.
-3) The extracted paragraphs can be found in the extracted_text.txt file.
+1) Run the scrape.py script to scrape websites and extract content. There are two ways to use it.
+   Usage no.1:
+        python scrape.py newspaper <newspaper_name> <article_count>.
+        Newspaper name is required and can be one of the following: informer, telegraf, kurir, danas, alo, all.
+        If 'all' is selected, all newspaper sources will be used for the extraction.
+        Article count (to extract per newspaper) is optional, and defaults to 10.
+   Usage no.2:
+        python scrape.py url <website_url>.
+        Website url is an arbitrary website url.
+2) Run the extract.py script to filter and merge the extracted content. There are also two ways to use it, based on
+   what option was used for scraping content.
+   Usage no.1:
+        python extract.py <min_character_count> <min_word_count> <list_of_newspaper_names_separated_by_blank_spaces>.
+        Minimum character and word count can be left 0, which defaults them to 20 and 5, respectively.
+        Newspaper name is required and can be one of the following: informer, telegraf, kurir, danas, alo, or can be left blank.
+        If no newspapers are provided, the extraction is performed for all newspapers.
+   Usage no.2:
+        python extract.py general <min character count> <min word count>.
+        This filters content, which was previously extracted from an arbitrary URL.
+3) The extracted and filtered text can be found in the extracted_text.txt file.
