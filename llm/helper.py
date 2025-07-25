@@ -1,4 +1,4 @@
-MISTRAL_PROMPT="""  
+MISTRAL_CHANGE_PROMPT="""  
             Zadatak:
 Tvoj zadatak je da analiziraš unetu rečenicu i ispraviš je tako da ukloniš svaki govor mržnje, uvrede, predrasude ili diskriminatorni sadržaj, ali da zadržiš osnovnu poruku rečenice ako je moguće. Cilj je da rečenica ostane informativna, ali da bude kulturna, neutralna i nepristrasna.
 
@@ -39,7 +39,7 @@ Izlaz: „Neutralna poruka. Nije ispravno donositi sud o ljudima na osnovu njiho
  
         """
 
-LLAMA3_PROMPT="""
+LLAMA3_CHANGE_PROMPT="""
 Tvoj zadatak je da analiziraš unetu rečenicu i ispraviš je tako da ukloniš svaki govor mržnje, uvrede, predrasude ili diskriminatorni sadržaj, ali da zadržiš osnovnu poruku ako je moguće. Rečenica treba da ostane informativna, ali da bude kulturna, neutralna i nepristrasna.
 
 Govor mržnje podrazumeva: uvrede, stereotipe, generalizacije, diskriminaciju ili agresivne izjave na osnovu rase, vere, nacionalnosti, pola, seksualne orijentacije, invaliditeta ili socijalnog statusa.
@@ -67,7 +67,7 @@ Izlaz: „Neutralna poruka. Nije ispravno donositi sud o ljudima na osnovu njiho
 
 """
 
-QWEN3_PROMPT="""
+QWEN3_CHANGE_PROMPT="""
 Tvoj zadatak je da analiziraš jednu rečenicu i ispraviš je tako da ukloniš govor mržnje, uvrede, predrasude ili diskriminatorni sadržaj, ali da zadržiš osnovnu poruku ako je moguće.
 Vrati samo jedan red:
 Ako si ispravio rečenicu, započni sa „Preformulisana.“
@@ -89,7 +89,7 @@ Izlaz: Neutralna poruka. Nije ispravno donositi sud o ljudima na osnovu njihove 
 
 """
 
-PHI3_PROMPT="""
+PHI3_CHANGE_PROMPT="""
 Tvoj zadatak je da analiziraš unetu rečenicu i ispraviš je tako da ukloniš svaki govor mržnje, uvrede, predrasude ili diskriminatorni sadržaj, ali da zadržiš osnovnu poruku ako je moguće. Rečenica treba da ostane informativna, ali da bude kulturna, neutralna i nepristrasna.
 
 Govor mržnje uključuje:
@@ -126,4 +126,35 @@ Izlaz: Neutralna poruka. Nije ispravno donositi sud o ljudima na osnovu njihove 
 
 """
 
-prompt_map={"mistral":MISTRAL_PROMPT, "llama3": LLAMA3_PROMPT, "qwen3": QWEN3_PROMPT,"phi3":PHI3_PROMPT}
+change_prompt_map={"mistral":MISTRAL_CHANGE_PROMPT, "llama3": LLAMA3_CHANGE_PROMPT, "qwen3": QWEN3_CHANGE_PROMPT,"phi3":PHI3_CHANGE_PROMPT}
+
+
+MISTRAL_HIGHLIGHT_PROMPT="""
+U tekstu koji ce ti biti prosledjen , pronađi sve delove koji predstavljaju govor mržnje — to su uvrede, stereotipi, diskriminatorne ili nasilne izjave na osnovu rase, vere, nacionalnosti, pola, seksualne orijentacije, invaliditeta ili društvenog statusa.
+Tekst koji treba da analiziraš nalazi se posle reči "Ulaz:"
+Ako tekst ne sadrži govor mržnje MORAŠ da vratiš samo tekst koji je prosledjen nakon reči "Ulaz:"
+
+Zadatak:
+Označi samo te delove tako što ćeš ih staviti između <mark> i </mark>.
+Nemoj menjati ostatak teksta. Nemoj dodavati objašnjenja. Vrati samo rezultat.
+
+Primeri:
+
+Ulaz: Ti cigani stalno kradu.
+Izlaz: Ti <mark>cigani stalno kradu</mark>.
+
+Ulaz: Mrzim gejeve, to nije prirodno.
+Izlaz: <mark>Mrzim gejeve, to nije prirodno</mark>.
+
+Ulaz: Žene su previše emotivne da bi bile lideri.
+Izlaz: <mark>Žene su previše emotivne da bi bile lideri</mark>.
+
+Ulaz: On je retardiran, ne zna ništa.
+Izlaz: On je <mark>retardiran</mark>, ne zna ništa.
+
+Ulaz: Svi Albanci su opasni.
+Izlaz: <mark>Svi Albanci su opasni</mark>.
+
+"""
+
+highlight_prompt_map={"mistral":MISTRAL_HIGHLIGHT_PROMPT}

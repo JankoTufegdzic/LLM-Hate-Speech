@@ -1,20 +1,8 @@
-import os
-import re
-import requests
-import pandas as pd
-import torch
-from abc import ABC, abstractmethod
 from typing import List, Tuple
-from dotenv import load_dotenv
+import requests
+from .helper import highlight_prompt_map
 
-from sentence_transformers import SentenceTransformer
-from huggingface_hub import login
-from sklearn.metrics.pairwise import cosine_similarity
-from .helper import change_prompt_map
-
-load_dotenv()
-
-class LLM_Pufirier():
+class LLM_Highlighter():
     def __init__(self, model_name: str, dataset_path: str = None, few_shot_examples: int = 3):
         self.model_name = model_name
         self.conversation_history = []
@@ -28,12 +16,12 @@ class LLM_Pufirier():
 
         self._add_to_history("system", self.system_prompt)
 
-        login(token=os.getenv("HF_TOKEN"))
-        device = "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
-        self.model = SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2', device=device)
+        # login(token=os.getenv("HF_TOKEN"))
+        # device = "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
+        # self.model = SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2', device=device)
 
     def _build_base_prompt(self) -> str:
-        return change_prompt_map[self.model_name]
+        return highlight_prompt_map[self.model_name]
 
     def _load_dataset(self, path: str) -> List[Tuple[str, str]]:
         return None
@@ -51,8 +39,7 @@ class LLM_Pufirier():
     def _add_to_history(self, role: str, content: str):
         self.conversation_history.append({"role": role, "content": content})
 
-    def purify(self, hate_speech_text: str) -> (str,float,bool): # type: ignore
-
+    def highlight(self, hate_speech_text: str) -> str:
         # Agent prompt
         self._add_to_history("user", f"Ulaz: {hate_speech_text}")
         
@@ -69,17 +56,7 @@ class LLM_Pufirier():
         content = result.get("message", {}).get("content", "").strip()
         self._add_to_history("assistant", content)
 
-        cleaned_content = content.replace("Izlaz: ", "")
+        cleaned_content=content.replace("Izlaz:","")
+        cleaned_content=cleaned_content.replace("Ulaz:","")
 
-        if "Neutralna poruka." in cleaned_content:
-            cleaned_content= re.sub(r"<think>.*?</think>", "", cleaned_content, flags=re.DOTALL)
-            cleaned_content = cleaned_content.replace("Neutralna poruka.", "")
-            return cleaned_content, 0.0, True
-        else:
-            cleaned_content= re.sub(r"<think>.*?</think>", "", cleaned_content, flags=re.DOTALL)
-            cleaned_content = cleaned_content.replace("Preformulisana.", "")
-            cosine_sim = self._compute_cosine_similarity(cleaned_content, hate_speech_text)
-            return cleaned_content, cosine_sim, False
-
-    def _compute_cosine_similarity(self, pred, truth):
-        return cosine_similarity(self.model.encode([pred]), self.model.encode([truth]))[0][0]
+        return cleaned_content
