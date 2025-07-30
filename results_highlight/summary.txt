@@ -1,0 +1,31 @@
+Results saved to results_highlight/highlight_result_mistral.xlsx
+
+Summary Statistics:
+Total URLs processed: 11
+Average original marked sentences: 2.45
+Average API marked sentences: 1.18
+Average difference: -1.27
+
+Results saved to results_highlight/highlight_result_phi3.xlsx
+
+Summary Statistics:
+Total URLs processed: 11
+Average original marked sentences: 2.45
+Average API marked sentences: 0.73
+Average difference: -1.73
+
+Results saved to results_highlight/highlight_result_llama3.xlsx
+
+Summary Statistics:
+Total URLs processed: 11
+Average original marked sentences: 2.45
+Average API marked sentences: 1.64
+Average difference: -0.82
+
+Results saved to highlight_result_qwen3.xlsx
+
+Summary Statistics:
+Total URLs processed: 11
+Average original marked sentences: 2.45
+Average API marked sentences: 3.64
+Average difference: 1.18
