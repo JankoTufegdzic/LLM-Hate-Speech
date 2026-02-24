@@ -69,9 +69,12 @@ def call_highlight_api(url):
     words = " ".join(text_list)
 
     highlighted_text=llm_highlighter.highlight(words)
+    marked_parts = re.findall(r"<mark>(.*?)</mark>", highlighted_text)
 
-    highlighted_text = mark_entire_sentence(highlighted_text)
-    
+    for mark in marked_parts:
+        words = re.sub(mark[1:-1], f"<mark>{mark[1:-1]}</mark>", words)
+
+    highlighted_text = mark_entire_sentence(words)
     return highlighted_text
 
 
@@ -144,7 +147,7 @@ def purify_results(input_csv, output_csv):
 
 
 if __name__ == '__main__':
-    purify_results(input_csv="dataset/hate_speech_cleaned.txt", output_csv=f"results_purify/result_{model_name}.xlsx")    
-    highlight_results(input_csv="dataset/highlight_data.csv", output_csv=f"results_highlight/highlight_result_{model_name}.xlsx")
+    #purify_results(input_csv="dataset/hate_speech_cleaned.txt", output_csv=f"results_purify/result_{model_name}.xlsx")
+    #highlight_results(input_csv="dataset/highlight_data.csv", output_csv=f"results_highlight/highlight_result_{model_name}.xlsx")
 
     app.run(host="0.0.0.0", port=5000, debug=True)
