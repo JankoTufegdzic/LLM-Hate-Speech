@@ -60,7 +60,9 @@ MODEL=mistral
 ## Citation
 If you use this codebase or ideas from the accompanying write-up, please cite appropriately:
 ```
-<Add citation details here>
+J. Tufegdžić, L. Hrvačević, M. Dodović, N. Stanković, D. Drašković, LLM-Driven Hate Speech Detection in News Content Extracted from URLs, Proceedings of the 34th International Electrotechnical and Computer Science Conference ERK 2025, pp. 415 - 420, IEEE Slovenia Section with Faculty of Electrical Engineering University of Ljubljana, Portorož, Slovenia, Sep, 2025
+
+M. Dodović, N. Stanković, J. Tufegdžić, L. Hrvačević, D. Drašković, From Toxic to Neutral: Automatic Hate Speech Rewriting Using LLMs, Proceedings of the 34th International Electrotechnical and Computer Science Conference ERK 2025, pp. 421 - 426, IEEE Slovenia Section with Faculty of Electrical Engineering University of Ljubljana, Portorož, Slovenia, Sep, 2025
 ```
 
 ## License
